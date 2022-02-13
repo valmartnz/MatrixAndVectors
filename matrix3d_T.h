@@ -1,5 +1,7 @@
 //============================================================
 // FILE: matrix_3dT.h
+// Valerie Martinez
+// CPSC 484
 //============================================================
 #ifndef __matrix_3d__
 #define __matrix_3d__
@@ -8,7 +10,7 @@
 #include <iomanip>
 #include <cstring>
 #include <cmath>
-#include "vector_3dT.h"
+#include "vector3d_T.h"
 
 template <typename T> class matrix3d;
 template <typename T> std::ostream& operator<<(std::ostream& os,
@@ -34,10 +36,10 @@ public:
 // indexing ops...
   vector3d<T> operator[](int i) const;
   vector3d<T>& operator[](int i);
-  
+
   T  operator()(int row, int col) const;
   T& operator()(int row, int col);
-  
+
   T* opengl_memory(int row, int col);
 //=======================================================================
   void name(const std::string& name);
@@ -61,7 +63,7 @@ public:
                     { a[0] + k, a[1] + k, a[2] + k });
   }
   friend matrix3d operator+(T k, const matrix3d& a) { return  a + k; }
-  friend matrix3d operator-(const matrix3d& a, T k) { /* TODO */ }
+  friend matrix3d operator-(const matrix3d& a, T k) { return a + -k; }
   friend matrix3d operator-(T k, const matrix3d& a) { /* TODO */ }
   friend matrix3d operator*(const matrix3d& a, T k) { /* TODO */ }
 

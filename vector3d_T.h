@@ -1,5 +1,7 @@
 //============================================================
-// FILE: vector_3dT.h
+// FILE: vector3d_T.h
+// Valerie Martinez
+// CPSC 484
 //============================================================
 
 #ifndef __vector3d_T_H__
@@ -57,22 +59,34 @@ public:
     check_equal_dims(u, v);
     return vector3d<T>(u.name_ + "+" + v.name_, u.dims_,
                     { u[0] + v[0], u[1] + v[1], u[2] + v[2], 0} );
-  }  
+  }
 
-  friend vector3d<T> operator-(const vector3d<T>& u, const vector3d<T>& v) { /* TODO */ }
+  friend vector3d<T> operator-(const vector3d<T>& u, const vector3d<T>& v) {
+    check_equal_dims(u, v);
+    return vector3d<T>(u.name_ + "-" + v.name_, u.dims_,
+                    { u[0] - v[0], u[1] - v[1], u[2] - v[2], 0} );
+  }
 //---------------------------------------------------------------------
   friend vector3d<T> operator+(T k, const vector3d<T>& v) {
     return vector3d<T>(std::to_string(k) + "+" + v.name_, v.dims_, { k + v[0], k + v[1], k + v[2], 0 });
   }
-  friend vector3d<T> operator+(const vector3d<T>& v, T k) { /* TODO */ }
+  friend vector3d<T> operator+(const vector3d<T>& v, T k) {
+    return k + v;
+  }
 //---------------------------------------------------------------------
-  friend vector3d<T> operator-(T k, const vector3d<T>& v) { /* TODO */ }
-  friend vector3d<T> operator-(const vector3d<T>& v, T k) { /* TODO */ }
+  friend vector3d<T> operator-(T k, const vector3d<T>& v) {
+    return vector3d<T>(std::to_string(k) + "-" + v.name_, v.dims_, { k - v[0], k - v[1], k - v[2], 0 });
+  }
+  friend vector3d<T> operator-(const vector3d<T>& v, T k) {
+    return -(k - v);
+  }
   //---------------------------------------------------------------------
   friend vector3d<T> operator*(T k, const vector3d<T>& v) {
     return vector3d<T>(std::to_string(k) + v.name_, v.dims_, { k * v[0], k * v[1], k * v[2], 0 });
   }
-  friend vector3d<T> operator*(const vector3d<T>& v, T k) { /* TODO */ };
+  friend vector3d<T> operator*(const vector3d<T>& v, T k) {
+    return k * v;
+  }
   //---------------------------------------------------------------------
   friend vector3d<T> operator/(const vector3d<T>& v, T k) {
     if (k == 0) { throw new std::invalid_argument("divide by zero"); }
@@ -136,13 +150,14 @@ template <typename T> std::string vector3d<T>::name() const { return name_; }
 template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
 
 //---------------------------------------------------------------------
-double x() const { return data_[0]; }
-double y() const { /* TODO */ }
-double z() const { /* TODO */ }
-
-double& x() { return data_[0]; }
-double& y() { /* TODO */ }
-double& z() { /* TODO */ }
+// already defined on lines 39-45, not sure if need to redefine
+// double x() const { return data_[0]; }
+// double y() const { /* TODO */ }
+// double z() const { /* TODO */ }
+//
+// double& x() { return data_[0]; }
+// double& y() { /* TODO */ }
+// double& z() { /* TODO */ }
 
 //---------------------------------------------------------------------
 
@@ -153,31 +168,62 @@ vector3d<T>& vector3d<T>::operator+=(const vector3d<T>& v) {
   return *this;
 }
 template <typename T>
-vector3d<T>& vector3d<T>::operator-=(const vector3d<T>& v) { /* TODO */ }
+vector3d<T>& vector3d<T>::operator-=(const vector3d<T>& v) {
+  return *this += -v;
+}
 //---------------------------------------------------------------------
-template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) { /* TODO */ }
-template <typename T> vector3d<T>& vector3d<T>::operator-=(T k) { /* TODO */ }
-template <typename T> vector3d<T>& vector3d<T>::operator*=(T k) { /* TODO */ }
-template <typename T> vector3d<T>& vector3d<T>::operator/=(T k) { /* TODO */ }
+template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) {
+  vector3d<T>& u = *this;
+  u[0] += k;  u[1] += k;  u[2] += k;  u[3] = k;
+  return *this;
+}
+template <typename T> vector3d<T>& vector3d<T>::operator-=(T k) {
+  vector3d<T>& u = *this;
+  u[0] = k - u[0];  u[1] = k - u[1];  u[2] = k - u[2];  u[3] = k;
+  return *this;
+}
+template <typename T> vector3d<T>& vector3d<T>::operator*=(T k) {
+  vector3d<T>& u = *this;
+  u[0] *= k;  u[1] *= k;  u[2] *= k;  u[3] = k;
+  return *this;
+}
+template <typename T> vector3d<T>& vector3d<T>::operator/=(T k) {
+  vector3d<T>& u = *this;
+  u[0] = k / u[0];  u[1] = k / u[1];  u[2] = k / u[2];  u[3] = k;
+  return *this;
+}
 
 //---------------------------------------------------------------------
 template <typename T>  /* read only idx */
 T  vector3d<T>::operator[](int i) const {  check_bounds(i);  return data_[i]; }
 
-template <typename T> T& vector3d<T>::operator[](int i) { /* TODO */ } // rw idx
+template <typename T> T& vector3d<T>::operator[](int i) {
+  check_bounds(i);
+  return data_[i];
+} // rw idx
 
 //-----------------------
 template <typename T>
-vector3d<T> vector3d<T>::operator-() { return vector3d("-" + name_, dims_, { -data_[0], -data_[1], -data_[2], 0 }); }
+vector3d<T> vector3d<T>::operator-() {
+  return vector3d("-" + name_, dims_, { -data_[0], -data_[1], -data_[2], 0 });
+}
 //-----------------------
 template <typename T>
-double vector3d<T>::dot(const vector3d<T>& v) const { /* TODO */ }
+double vector3d<T>::dot(const vector3d<T>& v) const {
+  check_equal_dims(*this, v);
+  return data_[0] * v[0] + data_[1] * v[1] + data_[2] * v[2];
+}
 //-----------------------
 template <typename T>
 double vector3d<T>::magnitude() const {  return sqrt(dot(*this));  }
 
 template <typename T>
-double vector3d<T>::angle(const vector3d<T>& v) const { /* TODO */ }
+double vector3d<T>::angle(const vector3d<T>& v) const {
+  double dot = this -> dot(v);
+  double magn = this -> magnitude();
+  double vectorMagn = v.magnitude();
+  return acos(dot / (magn * vectorMagn)); // returning arc cosine
+}
 //-----------------------
 template <typename T>
 vector3d<T> vector3d<T>::cross(const vector3d<T>& v) const {

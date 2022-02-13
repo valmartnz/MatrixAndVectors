@@ -1,5 +1,7 @@
 //============================================================
 // file: main.cpp
+// Valerie Martinez
+// CPSC 484
 //============================================================
 #include <iostream>
 #include <cstring>
@@ -41,11 +43,11 @@ void test_vectors() {
 
   assert(u == u);
   assert(u != v);
-  
+
   assert(u + v == v + u);
   assert(u - v == -(v - u));
   assert(-(-u) == u);
-  
+
   assert(3.0 + u == u + 3.0);
   assert(3.0 * u == u * 3.0);
   assert((u - 3.0) == -(3.0 - u));
@@ -54,11 +56,11 @@ void test_vectors() {
   assert(u + vector3D::zero() == u);
 
   assert(i.dot(j) == j.dot(k) == k.dot(i) == 0);
-  
+
   assert(i.cross(j) == k);
   assert(j.cross(k) == i);
   assert(k.cross(i) == j);
-  
+
   assert(u.cross(v) == -v.cross(u));
   assert(u.cross(v + w) == u.cross(v) + u.cross(w));
   assert((u.cross(v)).dot(u) == 0);
@@ -69,7 +71,7 @@ void test_vectors() {
   assert(i.angle(j) == M_PI_2);
   assert(j.angle(k) == M_PI_2);
   assert(k.angle(i) == M_PI_2);
-  
+
   vector3D uhat = u / u.magnitude();
   show_vect(u);
   show_vect(uhat);
@@ -84,7 +86,7 @@ void test_matrices() {
   print("\n====================  TESTING MATRICES  ========================");
   matrix3dD a("a", 3, {3, 2, 0,   0, 0, 1,   2, -2, 1});
   matrix3dD b("b", 3, {1, 0, 5,   2, 1, 6,   3,  4, 0});
-  
+
   matrix3dD id = matrix3dD::identity(3);
   assert(a * id == a);
   assert(a * b != -b * a);
@@ -169,8 +171,6 @@ int main(int argc, const char * argv[]) {
   test_vectors();
   test_matrices();
   test_matrices_and_vectors();
-    
+
   return 0;
 }
-
-
