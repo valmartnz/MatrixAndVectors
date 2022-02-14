@@ -1,0 +1,130 @@
+
+====================  TESTING VECTORS  ========================
+u
+<u,   1   2   4   0>
+u is: <u,   1   2   4   0>
+u is: <u,   1   2   4   0>
+v is: <v,   8  16  32   0>
+i is: <i,   1   0   0   0>
+j is: <j,   0   1   0   0>
+k is: <k,   0   0   1   0>
+3.000000i+4.000000j-2.000000k is: <3.000000i+4.000000j-2.000000k,   3   4  -2   0>
+1.57
+1.57
+u is: <u,   1   2   4   0>
+0.218218u is: <0.218218u,   0   0   0   0>
+1
+...test vectors assertions passed
+====================  FINISHED testing vectors  ========================
+
+====================  TESTING MATRICES  ========================
+a is: <'a', <col0,   3   0   2   0><col1,   2   0  -2   0><col2,   0   1   1   0>> OR by rows...
+  3   2   0
+  0   0   1
+  2  -2   1
+>
+b is: <'b', <col0,   1   2   3   0><col1,   0   1   4   0><col2,   5   6   0   0>> OR by rows...
+  1   0   5
+  2   1   6
+  3   4   0
+>
+-a is: <'-a', <-col0,  -3   0  -2   0><-col1,  -2   0   2   0><-col2,   0  -1  -1   0>> OR by rows...
+ -3  -2   0
+  0   0  -1
+ -2   2  -1
+>
+-b is: <'-b', <-col0,  -1  -2  -3   0><-col1,   0  -1  -4   0><-col2,  -5  -6   0   0>> OR by rows...
+ -1   0  -5
+ -2  -1  -6
+ -3  -4   0
+>
+a+b is: <'a+b', <col0,   7   3   1   0><col1,   2   4   2   0><col2,  27   0  -2   0>> OR by rows...
+  7   2  27
+  3   4   0
+  1   2  -2
+>
+|a| = 10.00
+|b| = 1.00
+a' is: <'a'', <col0,   3   2   0   0><col1,   0   0   1   0><col2,   2  -2   1   0>> OR by rows...
+  3   0   2
+  2   0  -2
+  0   1   1
+>
+b' is: <'b'', <col0,   1   0   5   0><col1,   2   1   6   0><col2,   3   4   0   0>> OR by rows...
+  1   2   3
+  0   1   4
+  5   6   0
+>
+Min(a) is: <'Min(a)', <col0,   2   2   2   0><col1,  -2   3   3   0><col2,   0 -10   0   0>> OR by rows...
+  2  -2   0
+  2   3 -10
+  2   3   0
+>
+Min(b) is: <'Min(b)', <col0, -24 -20  -5   0><col1, -18 -15  -4   0><col2,   5   4   1   0>> OR by rows...
+-24 -18   5
+-20 -15   4
+ -5  -4   1
+>
+Cofactor(a) is: <'Cofactor(a)', <col0,   2  -2   2   0><col1,   2   3  -3   0><col2,   0  10   0   0>> OR by rows...
+  2   2   0
+ -2   3  10
+  2  -3   0
+>
+Cofactor(b) is: <'Cofactor(b)', <col0, -24  20  -5   0><col1,  18 -15   4   0><col2,   5  -4   1   0>> OR by rows...
+-24  18   5
+ 20 -15  -4
+ -5   4   1
+>
+Cofactor(a)' is: <'Cofactor(a)'', <col0,   2   2   0   0><col1,  -2   3  10   0><col2,   2  -3   0   0>> OR by rows...
+  2  -2   2
+  2   3  -3
+  0  10   0
+>
+Cofactor(b)' is: <'Cofactor(b)'', <col0, -24  18   5   0><col1,  20 -15  -4   0><col2,  -5   4   1   0>> OR by rows...
+-24  20  -5
+ 18 -15   4
+  5  -4   1
+>
+0.100000*Cofactor(a)' is: <'0.100000*Cofactor(a)'', <0.100000col0,   0   0   0   0><0.100000col1,   0   0   1   0><0.100000col2,   0   0   0   0>> OR by rows...
+  0   0   0
+  0   0   0
+  0   1   0
+>
+1.000000*Cofactor(b)' is: <'1.000000*Cofactor(b)'', <1.000000col0, -24  18   5   0><1.000000col1,  20 -15  -4   0><1.000000col2,  -5   4   1   0>> OR by rows...
+-24  20  -5
+ 18 -15   4
+  5  -4   1
+>
+a+0.100000*Cofactor(a)' is: <'a+0.100000*Cofactor(a)'', <col0,   1   0   0   0><col1,   0   1   0   0><col2,   0   0   1   0>> OR by rows...
+  1   0   0
+  0   1   0
+  0   0   1
+>
+b+1.000000*Cofactor(b)' is: <'b+1.000000*Cofactor(b)'', <col0,   1   0   0   0><col1,   0   1   0   0><col2,   0   0   1   0>> OR by rows...
+  1   0   0
+  0   1   0
+  0   0   1
+>
+I is: <'I', <col0,   1   0   0   0><col1,   0   1   0   0><col2,   0   0   1   0>> OR by rows...
+  1   0   0
+  0   1   0
+  0   0   1
+>
+...test matrices assertions passed
+====================  FINISHED testing matrices  ========================
+
+====================  TESTING MATRICES and VECTORS  ========================
+p is: <p,   1   2   0>
+m is: <'m', <col0,   1   4   0   0><col1,   2   0   0   0><col2,   3   0   0   0>> OR by rows...
+  1   2   3
+  4   0   0
+  0   0   0
+>
+q is: <q,   1   2   3   0>
+n is: <'n', <col0,   1   4   7   0><col1,   2   5   8   0><col2,   3   6   9   0>> OR by rows...
+  1   2   3
+  4   5   6
+  7   8   9
+>
+...test_matrices_and_vectors assertions passed
+====================  FINISHED testing matrices and vectors  ========================
