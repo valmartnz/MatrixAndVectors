@@ -58,35 +58,34 @@ public:
   friend vector3d<T> operator+(const vector3d<T>& u, const vector3d<T>& v) {
     check_equal_dims(u, v);
     return vector3d<T>(u.name_ + "+" + v.name_, u.dims_,
-                    { u[0] + v[0], u[1] + v[1], u[2] + v[2], 0} );
+                      { u[0] + v[0], u[1] + v[1], u[2] + v[2], 0} );
   }
 
   friend vector3d<T> operator-(const vector3d<T>& u, const vector3d<T>& v) {
     check_equal_dims(u, v);
     return vector3d<T>(u.name_ + "-" + v.name_, u.dims_,
-                    { u[0] - v[0], u[1] - v[1], u[2] - v[2], 0} );
+                      { u[0] - v[0], u[1] - v[1], u[2] - v[2], 0} );
   }
 //---------------------------------------------------------------------
   friend vector3d<T> operator+(T k, const vector3d<T>& v) {
-    return vector3d<T>(std::to_string(k) + "+" + v.name_, v.dims_, { k + v[0], k + v[1], k + v[2], 0 });
+    return vector3d<T>(std::to_string(k) + "+" + v.name_, v.dims_,
+                      { k + v[0], k + v[1], k + v[2], 0 });
   }
   friend vector3d<T> operator+(const vector3d<T>& v, T k) {
     return k + v;
   }
 //---------------------------------------------------------------------
   friend vector3d<T> operator-(T k, const vector3d<T>& v) {
-    return vector3d<T>(std::to_string(k) + "-" + v.name_, v.dims_, { k - v[0], k - v[1], k - v[2], 0 });
+    return vector3d<T>(std::to_string(k) + "-" + v.name_, v.dims_,
+                      { k - v[0], k - v[1], k - v[2], 0 });
   }
-  friend vector3d<T> operator-(const vector3d<T>& v, T k) {
-    return -(k - v);
-  }
+  friend vector3d<T> operator-(const vector3d<T>& v, T k) { return -(k - v); }
   //---------------------------------------------------------------------
   friend vector3d<T> operator*(T k, const vector3d<T>& v) {
-    return vector3d<T>(std::to_string(k) + v.name_, v.dims_, { k * v[0], k * v[1], k * v[2], 0 });
+    return vector3d<T>(std::to_string(k) + v.name_, v.dims_,
+                      { k * v[0], k * v[1], k * v[2], 0 });
   }
-  friend vector3d<T> operator*(const vector3d<T>& v, T k) {
-    return k * v;
-  }
+  friend vector3d<T> operator*(const vector3d<T>& v, T k) { return k * v; }
   //---------------------------------------------------------------------
   friend vector3d<T> operator/(const vector3d<T>& v, T k) {
     if (k == 0) { throw new std::invalid_argument("divide by zero"); }
