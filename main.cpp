@@ -11,6 +11,7 @@
 //MATRIX and VECTOR classes assignment
 #include "vector3d_T.h"
 #include "matrix3d_T.h"
+#include "quaternion_T.h"
 
 
 template <typename T>
@@ -166,11 +167,19 @@ void test_matrices_and_vectors() {
   print("====================  FINISHED testing matrices and vectors  ========================");
 }
 
+void test_quaternions() {
+  print("\n====================  TESTING QUATERNION  ========================");
+  quaternion<double>::run_tests();
+  print("...test_matrices_and_vectors assertions passed");
+  print("\n====================  FINISHED testing quaternions  ========================");
+}
 
 int main(int argc, const char * argv[]) {
-  test_vectors();
-  test_matrices();
-  test_matrices_and_vectors();
+  // test_vectors();
+  // test_matrices();
+  // test_matrices_and_vectors();
+  test_quaternions();
+  print("...program completed...\n");
 
   return 0;
 }
